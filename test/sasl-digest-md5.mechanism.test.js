@@ -14,6 +14,10 @@
     it('should be named DIGEST-MD5', function() {
       expect(mech.name).to.equal('DIGEST-MD5');
     });
+    
+    it('should not be client first', function() {
+      expect(mech.clientFirst).to.equal(false);
+    });
   });
   
   describe('response to challenge', function() {
