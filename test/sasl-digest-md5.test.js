@@ -8,7 +8,7 @@
   }
 }(this, function(sasldigestmd5) {
 
-  describe('sasl-plain', function() {
+  describe('sasl-digest-md5', function() {
     
     it('should export Mechanism', function() {
       expect(sasldigestmd5.Mechanism).to.be.a('function');

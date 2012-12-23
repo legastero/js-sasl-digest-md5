@@ -14,15 +14,18 @@
     it('should be named DIGEST-MD5', function() {
       expect(mech.name).to.equal('DIGEST-MD5');
     });
-    
-    it.skip('should encode credentials', function() {
-      expect(mech.encode({ username: 'johndoe', password: 'secret' })).to.equal('\u0000johndoe\u0000secret');
+  });
+  
+  describe('response to challenge', function() {
+    var mech = new Mechanism({
+      genNonce: function() { return 'OA6MHXh6VqTrRk'; }
     });
+    mech.challenge('realm="elwood.innosoft.com",nonce="OA6MG9tEQGm2hh",qop="auth",algorithm=md5-sess,charset=utf-8');
     
-    it.skip('should encode credentials with authzid', function() {
-      expect(mech.encode({ username: 'Kurt', password: 'xipj3plmq', authzid: 'Ursel' })).to.equal('Ursel\u0000Kurt\u0000xipj3plmq');
+    it('should encode credentials', function() {
+      var enc = mech.response({ username: 'chris', password: 'secret', host: 'elwood.innosoft.com', serviceType: 'imap' });
+      expect(enc).to.equal('username="chris",realm="elwood.innosoft.com",nonce="OA6MG9tEQGm2hh",cnonce="OA6MHXh6VqTrRk",nc=00000001,qop=auth,digest-uri="imap/elwood.innosoft.com",response=d388dad90d4bbd760a152321f2143af7,charset=utf-8');
     });
-    
   });
   
   return { name: 'test.sasl-plain.mechanism' };
