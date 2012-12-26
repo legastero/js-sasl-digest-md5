@@ -18,6 +18,10 @@
     it('should not be client first', function() {
       expect(mech.clientFirst).to.equal(false);
     });
+    
+    it('should have chainable challenge function', function() {
+      expect(mech.challenge('realm="elwood.innosoft.com",nonce="OA6MG9tEQGm2hh",qop="auth",algorithm=md5-sess,charset=utf-8')).to.equal(mech);
+    });
   });
   
   describe('response to challenge', function() {
