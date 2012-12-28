@@ -37,6 +37,7 @@
   },
   "volo": {
     "dependencies": {
+      "crypto": "github:anchorjs/crypto/master"
     }
   }
 }
