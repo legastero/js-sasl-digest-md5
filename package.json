@@ -1,8 +1,14 @@
 {
   "name": "alt-sasl-digest-md5",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JavaScript implementation of DIGEST-MD5 SASL mechanism.",
-  "keywords": ["sasl", "auth", "authn", "authentication", "security"],
+  "keywords": [
+    "sasl",
+    "auth",
+    "authn",
+    "authentication",
+    "security"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/legastero/js-sasl-digest-md5.git"
