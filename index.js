@@ -34,7 +34,7 @@ Mechanism.prototype.clientFirst = false;
 
 Mechanism.prototype.response = function(cred) {
     if (this._completed) {
-        return '';
+        return undefined;
     }
 
     var uri = cred.serviceType + '/' + cred.host;
