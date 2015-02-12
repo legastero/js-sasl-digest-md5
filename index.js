@@ -1,4 +1,5 @@
-var crypto = require('crypto');
+var randomBytes = require('randombytes');
+var createHash = require('create-hash');
 
 
 function parse(chal) {
@@ -14,7 +15,7 @@ function parse(chal) {
 }
 
 function genNonce() {
-    return crypto.randomBytes(16).toString('hex');
+    return randomBytes(16).toString('hex');
 }
 
 
@@ -59,18 +60,18 @@ Mechanism.prototype.response = function(cred) {
     str += ',qop=' + qop;
     str += ',digest-uri="' + uri + '"';
   
-    var base = crypto.createHash('md5').update(cred.username)
-                                       .update(':')
-                                       .update(realm)
-                                       .update(':')
-                                       .update(cred.password)
-                                       .digest();
+    var base = createHash('md5').update(cred.username)
+                                .update(':')
+                                .update(realm)
+                                .update(':')
+                                .update(cred.password)
+                                .digest();
 
-    var ha1 = crypto.createHash('md5').update(base)
-                                      .update(':')
-                                      .update(this._nonce)
-                                      .update(':')
-                                      .update(cnonce);
+    var ha1 = createHash('md5').update(base)
+                               .update(':')
+                               .update(this._nonce)
+                               .update(':')
+                               .update(cnonce);
 
 
     if (cred.authzid) {
@@ -79,8 +80,8 @@ Mechanism.prototype.response = function(cred) {
 
     ha1 = ha1.digest('hex');
   
-    var ha2 = crypto.createHash('md5').update('AUTHENTICATE:')
-                                      .update(uri);
+    var ha2 = createHash('md5').update('AUTHENTICATE:')
+                               .update(uri);
     
     if (qop === 'auth-int' || qop === 'auth-conf') {
         ha2.update(':00000000000000000000000000000000');
@@ -88,18 +89,18 @@ Mechanism.prototype.response = function(cred) {
 
     ha2 = ha2.digest('hex');
   
-    var digest = crypto.createHash('md5').update(ha1)
-                                         .update(':')
-                                         .update(this._nonce)
-                                         .update(':')
-                                         .update(nc)
-                                         .update(':')
-                                         .update(cnonce)
-                                         .update(':')
-                                         .update(qop)
-                                         .update(':')
-                                         .update(ha2)
-                                         .digest('hex');
+    var digest = createHash('md5').update(ha1)
+                                  .update(':')
+                                  .update(this._nonce)
+                                  .update(':')
+                                  .update(nc)
+                                  .update(':')
+                                  .update(cnonce)
+                                  .update(':')
+                                  .update(qop)
+                                  .update(':')
+                                  .update(ha2)
+                                  .digest('hex');
 
     str += ',response=' + digest;
   
