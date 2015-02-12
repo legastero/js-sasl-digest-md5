@@ -1,6 +1,6 @@
 {
   "name": "alt-sasl-digest-md5",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JavaScript implementation of DIGEST-MD5 SASL mechanism.",
   "keywords": [
     "sasl",
